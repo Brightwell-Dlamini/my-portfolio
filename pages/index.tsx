@@ -3,6 +3,10 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import Expirience from '../components/Expirience';
+import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import Contact from '../components/Contact';
 
 const Home: NextPage = () => {
   return (
@@ -11,9 +15,10 @@ const Home: NextPage = () => {
         <title>Siyabonga&apos;s Portfolio</title>
       </Head>
       <main>
+        {/* Header */}
         <Header />
         {/* Hero */}
-        <section id="hero " className="snap-start">
+        <section id="hero" className="snap-start">
           <Hero />
         </section>
         {/* About */}
@@ -21,9 +26,21 @@ const Home: NextPage = () => {
           <About />
         </section>
         {/* Expirience */}
-        {/* Skilld */}
+        <section id="expirience" className="snap-center">
+          <Expirience />
+        </section>
+        {/* Skills */}
+        <section>
+          <Skills />
+        </section>
         {/* Projects */}
+        <section>
+          <Projects />
+        </section>
         {/* Contact me */}
+        <section>
+          <Contact />
+        </section>
       </main>
     </div>
   );
