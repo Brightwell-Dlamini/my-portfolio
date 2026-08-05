@@ -15,11 +15,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       <WhyWiggle />
+       <Skills />
+      <Projects />
       <About />
       <Roles />
       <Experience />
-      <Skills />
-      <Projects />
+     
       <Contact />
       <Footer />
     </main>
