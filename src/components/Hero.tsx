@@ -196,7 +196,7 @@ export function Hero() {
           <div className="flex flex-col justify-center">
             {/* Status Badge */}
             <motion.div variants={itemVariants} className="mb-4">
-              <div className="inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/70 px-4 py-1.5 text-xs font-medium tracking-wider text-slate-600 shadow-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 dark:text-slate-300">
+              <div className="inline-flex items-center gap-3 rounded-full border border-slate-200/80 dark:border-slate-700/80 bg-white/70 dark:bg-slate-900/60 px-4 py-1.5 text-xs font-medium tracking-wider text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-sm">
                 <motion.span
                   className="relative flex h-2 w-2"
                   variants={pulseVariants}
@@ -212,7 +212,7 @@ export function Hero() {
 
             {/* Main Heading */}
             <motion.div variants={itemVariants} className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
                 Hi,{' '}
                 <span className="relative inline-block">
                   Brightwell
@@ -230,7 +230,7 @@ export function Hero() {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base dark:text-slate-300"
+              className="mt-4 max-w-xl text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base"
             >
               I think I&apos;m the best fit for{' '}
               <span className="relative inline-block font-semibold text-slate-900 dark:text-white">
@@ -259,15 +259,15 @@ export function Hero() {
                   <motion.div
                     key={index}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="rounded-xl border border-slate-200/70 bg-white/60 p-2.5 backdrop-blur-sm transition-all hover:shadow-md dark:border-slate-700/70 dark:bg-slate-900/40"
+                    className="rounded-xl border border-slate-200/70 dark:border-slate-700/70 bg-white/60 dark:bg-slate-900/40 p-2.5 backdrop-blur-sm transition-all hover:shadow-md dark:hover:shadow-slate-800/50"
                   >
                     <div className="flex items-center gap-2">
-                      <Icon className="h-4 w-4 text-brand-500 dark:text-brand-400" />
+                      <Icon className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                       <div>
                         <div className="text-lg font-bold text-slate-900 dark:text-white">
                           {stat.value}
                         </div>
-                        <div className="text-[9px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        <div className="text-[9px] font-medium uppercase tracking-wide text-slate-600 dark:text-slate-400">
                           {stat.label}
                         </div>
                       </div>
@@ -286,7 +286,7 @@ export function Hero() {
                 href="#projects"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-xl hover:shadow-brand-500/35 dark:from-brand-500 dark:to-brand-400"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 dark:from-brand-500 dark:to-brand-400 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 dark:shadow-brand-500/20 transition-all hover:shadow-xl hover:shadow-brand-500/35 dark:hover:shadow-brand-500/30"
               >
                 <span>See the work</span>
                 <motion.span
@@ -302,7 +302,7 @@ export function Hero() {
                 href="/resume"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur transition-all hover:border-brand-300 hover:bg-white hover:text-brand-700 hover:shadow-md dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:border-brand-500/50 dark:hover:text-brand-300"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/50 px-5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 shadow-sm backdrop-blur transition-all hover:border-brand-300 dark:hover:border-brand-500/50 hover:bg-white dark:hover:bg-slate-800/50 hover:text-brand-700 dark:hover:text-brand-300 hover:shadow-md"
               >
                 <motion.span
                   animate={{ y: [0, -3, 0] }}
@@ -313,34 +313,21 @@ export function Hero() {
                 Download CV
               </motion.a>
 
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-              >
-                Contact
-                <motion.span
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <ArrowDown size={14} />
-                </motion.span>
-              </motion.a>
+             
             </motion.div>
 
             {/* Contact Info */}
             <motion.div
               variants={itemVariants}
-              className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500 dark:text-slate-400"
+              className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-600 dark:text-slate-400"
             >
               <motion.a
                 href="mailto:dlaminibrightwell@gmail.com"
                 whileHover={{ scale: 1.05, color: '#6366f1' }}
                 className="inline-flex items-center gap-2 transition-all hover:text-brand-600 dark:hover:text-brand-400"
               >
-                <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <Mail size={13} className="text-brand-500" />
+                <div className="rounded-full bg-brand-100/50 dark:bg-brand-900/30 p-1">
+                  <Mail size={13} className="text-brand-600 dark:text-brand-400" />
                 </div>
                 dlaminibrightwell@gmail.com
               </motion.a>
@@ -349,8 +336,8 @@ export function Hero() {
                 whileHover={{ scale: 1.05, color: '#6366f1' }}
                 className="inline-flex items-center gap-2 transition-all hover:text-brand-600 dark:hover:text-brand-400"
               >
-                <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <Phone size={13} className="text-brand-500" />
+                <div className="rounded-full bg-brand-100/50 dark:bg-brand-900/30 p-1">
+                  <Phone size={13} className="text-brand-600 dark:text-brand-400" />
                 </div>
                 +268 7636 5539
               </motion.a>
@@ -358,8 +345,8 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2"
               >
-                <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <MapPin size={13} className="text-brand-500" />
+                <div className="rounded-full bg-brand-100/50 dark:bg-brand-900/30 p-1">
+                  <MapPin size={13} className="text-brand-600 dark:text-brand-400" />
                 </div>
                 Mankayane, Eswatini
               </motion.span>
@@ -380,7 +367,7 @@ export function Hero() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-full bg-white/60 p-2 text-slate-600 shadow-sm backdrop-blur transition-all hover:bg-brand-50 hover:text-brand-600 dark:bg-slate-900/40 dark:text-slate-300 dark:hover:bg-brand-900/30 dark:hover:text-brand-400"
+                    className="rounded-full bg-white/60 dark:bg-slate-900/40 p-2 text-slate-600 dark:text-slate-300 shadow-sm backdrop-blur transition-all hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400"
                     aria-label={social.name}
                   >
                     <Icon className="h-4 w-4" />
@@ -401,7 +388,7 @@ export function Hero() {
                 variants={floatVariants}
                 initial="initial"
                 animate="animate"
-                className="absolute -top-6 -left-6 z-10 rounded-xl bg-white/80 p-2.5 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
+                className="absolute -top-6 -left-6 z-10 rounded-xl bg-white/80 dark:bg-slate-900/80 p-2.5 shadow-lg dark:shadow-xl backdrop-blur-sm"
               >
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-amber-400" />
@@ -416,7 +403,7 @@ export function Hero() {
                 initial="initial"
                 animate="animate"
                 transition={{ delay: 0.5 }}
-                className="absolute -bottom-4 -right-4 z-10 rounded-xl bg-white/80 p-2.5 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
+                className="absolute -bottom-4 -right-4 z-10 rounded-xl bg-white/80 dark:bg-slate-900/80 p-2.5 shadow-lg dark:shadow-xl backdrop-blur-sm"
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-emerald-400" />
@@ -427,7 +414,7 @@ export function Hero() {
               </motion.div>
 
               {/* Profile Image Container */}
-              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 shadow-2xl dark:from-brand-950 dark:to-accent-950">
+              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 dark:from-brand-950 dark:to-accent-950 shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-6xl font-bold text-slate-300 dark:text-slate-700">
@@ -449,7 +436,7 @@ export function Hero() {
 
                 {/* Floating Tech Tags */}
                 <motion.div
-                  className="absolute left-3 top-1/3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute left-3 top-1/3 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-300 shadow-lg backdrop-blur-sm"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.5, ease: 'easeInOut' }}
@@ -457,7 +444,7 @@ export function Hero() {
                   React · Next.js
                 </motion.div>
                 <motion.div
-                  className="absolute right-3 top-1/4 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute right-3 top-1/4 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-300 shadow-lg backdrop-blur-sm"
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.5, ease: 'easeInOut' }}
@@ -465,7 +452,7 @@ export function Hero() {
                   TypeScript
                 </motion.div>
                 <motion.div
-                  className="absolute bottom-1/4 left-4 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute bottom-1/4 left-4 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-300 shadow-lg backdrop-blur-sm"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.5, ease: 'easeInOut' }}
@@ -473,7 +460,7 @@ export function Hero() {
                   UI/UX
                 </motion.div>
                 <motion.div
-                  className="absolute bottom-6 right-6 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute bottom-6 right-6 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-300 shadow-lg backdrop-blur-sm"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.1, duration: 0.5, ease: 'easeInOut' }}
