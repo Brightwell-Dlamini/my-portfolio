@@ -204,9 +204,7 @@ export function Navbar() {
                 className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300 group-hover:w-full"
               />
             </span>
-            <span className="text-brand-600 dark:text-brand-400 transition-colors group-hover:text-accent-600 dark:group-hover:text-accent-400">
-              →Wiggle
-            </span>
+           
             <motion.span
               className="absolute -inset-1 rounded-full bg-brand-500/0 blur-xl transition-all duration-500 group-hover:bg-brand-500/10 dark:group-hover:bg-brand-400/10"
             />
