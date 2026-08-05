@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ResumePrintButton } from "./PrintButton";
 
 export const metadata: Metadata = {
@@ -10,9 +11,9 @@ export default function ResumePage() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       <div className="no-print sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur">
-        <a href="/" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+        <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-900">
           ← Back to application
-        </a>
+        </Link>
         <ResumePrintButton />
       </div>
 
