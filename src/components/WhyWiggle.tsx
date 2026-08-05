@@ -26,6 +26,7 @@ const cards = [
     color: "from-amber-500 to-orange-500",
     bgColor: "bg-amber-50 dark:bg-amber-950/20",
     borderColor: "border-amber-200/50 dark:border-amber-800/30",
+    textColor: "text-amber-700 dark:text-amber-300",
   },
   {
     title: "Design + engineering",
@@ -34,6 +35,7 @@ const cards = [
     color: "from-purple-500 to-pink-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/20",
     borderColor: "border-purple-200/50 dark:border-purple-800/30",
+    textColor: "text-purple-700 dark:text-purple-300",
   },
   {
     title: "Content systems matter",
@@ -42,6 +44,7 @@ const cards = [
     color: "from-emerald-500 to-teal-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/20",
     borderColor: "border-emerald-200/50 dark:border-emerald-800/30",
+    textColor: "text-emerald-700 dark:text-emerald-300",
   },
 ];
 
@@ -117,7 +120,7 @@ export function WhyWiggle() {
     <section
       ref={sectionRef}
       id="why"
-      className="relative overflow-hidden py-20 sm:py-28 lg:py-32"
+      className="relative overflow-hidden py-20 sm:py-28 lg:py-32 bg-gradient-to-b from-slate-50/50 via-white/50 to-slate-50/50 dark:from-slate-950/30 dark:via-slate-900/50 dark:to-slate-950/30"
     >
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -161,13 +164,13 @@ export function WhyWiggle() {
         >
           <motion.div variants={headerVariants} className="space-y-4">
             {/* Section Label */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 px-3 py-1 text-xs font-medium tracking-wider text-slate-600 backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 dark:text-slate-300">
-              <Sparkles className="h-3 w-3 text-brand-500" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 dark:border-slate-700/80 bg-white/70 dark:bg-slate-900/60 px-3 py-1 text-xs font-medium tracking-wider text-slate-700 dark:text-slate-300 backdrop-blur-sm">
+              <Sparkles className="h-3 w-3 text-brand-600 dark:text-brand-400" />
               <span className="uppercase tracking-[0.15em]">Why This Application</span>
             </div>
 
             {/* Heading with animated underline */}
-            <h2 className="relative text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
+            <h2 className="relative text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
               Built around how Wiggle works
               <motion.span
                 className="absolute -bottom-2 left-0 h-1 w-24 rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
@@ -177,7 +180,7 @@ export function WhyWiggle() {
               />
             </h2>
 
-            <p className="max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
+            <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300 sm:text-lg">
               Digital agencies need people who can move between craft and code. My recent work —
               local products, CMS demos and full-stack apps — is chosen to show that range, not a
               single narrow specialty.
@@ -208,14 +211,15 @@ export function WhyWiggle() {
                 <div className={`
                   relative rounded-2xl border ${card.borderColor} ${card.bgColor}
                   p-6 backdrop-blur-sm transition-all duration-300
-                  hover:shadow-xl
+                  hover:shadow-xl hover:shadow-${card.color.split(' ')[0]}/10
+                  dark:hover:shadow-${card.color.split(' ')[0]}/5
                 `}>
                   {/* Animated background glow */}
                   <motion.div
                     className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
                       background: `radial-gradient(circle at 50% 0%, ${card.color.split(' ')[0].replace('from-', '')} 0%, transparent 70%)`,
-                      opacity: 0.1,
+                      opacity: 0.08,
                     }}
                   />
 
@@ -228,7 +232,7 @@ export function WhyWiggle() {
                   >
                     <div className={`
                       rounded-xl p-2.5 bg-gradient-to-br ${card.color}
-                      shadow-lg
+                      shadow-lg shadow-${card.color.split(' ')[0]}/20
                     `}>
                       <Icon className="h-5 w-5 text-white" />
                     </div>
@@ -242,16 +246,16 @@ export function WhyWiggle() {
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
                     {card.body}
                   </p>
 
                   {/* Decorative corner accent */}
                   <motion.div
-                    className="absolute -right-1 -top-1 h-6 w-6 rounded-tr-2xl border-r-2 border-t-2 border-brand-300/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:border-brand-500/20"
+                    className="absolute -right-1 -top-1 h-6 w-6 rounded-tr-2xl border-r-2 border-t-2 border-brand-300/30 dark:border-brand-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <motion.div
-                    className="absolute -bottom-1 -left-1 h-6 w-6 rounded-bl-2xl border-b-2 border-l-2 border-accent-300/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:border-accent-500/20"
+                    className="absolute -bottom-1 -left-1 h-6 w-6 rounded-bl-2xl border-b-2 border-l-2 border-accent-300/30 dark:border-accent-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                 </div>
               </motion.div>
@@ -267,7 +271,7 @@ export function WhyWiggle() {
           className="mt-16"
         >
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="flex items-center gap-2 rounded-full bg-slate-100/80 px-4 py-2 backdrop-blur-sm dark:bg-slate-800/50">
+            <div className="flex items-center gap-2 rounded-full bg-slate-100/80 dark:bg-slate-800/50 px-4 py-2 backdrop-blur-sm">
               <Zap className="h-4 w-4 text-amber-500" />
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 Capabilities:
@@ -284,9 +288,9 @@ export function WhyWiggle() {
                   animate={isInView ? "visible" : "hidden"}
                   transition={{ delay: 0.7 + index * 0.05 }}
                   whileHover={{ scale: 1.05, y: -2 }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/70 bg-white/60 px-3 py-1.5 text-xs font-medium text-slate-600 backdrop-blur-sm transition-all hover:border-brand-300/50 hover:bg-brand-50/80 hover:text-brand-700 dark:border-slate-700/70 dark:bg-slate-900/40 dark:text-slate-400 dark:hover:border-brand-500/30 dark:hover:bg-brand-950/30 dark:hover:text-brand-300"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/70 dark:border-slate-700/70 bg-white/60 dark:bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 backdrop-blur-sm transition-all hover:border-brand-300/50 dark:hover:border-brand-500/30 hover:bg-brand-50/80 dark:hover:bg-brand-950/30 hover:text-brand-700 dark:hover:text-brand-300"
                 >
-                  <Icon className="h-3 w-3" />
+                  <Icon className="h-3 w-3 text-slate-500 dark:text-slate-400" />
                   {cap.label}
                 </motion.div>
               );
@@ -305,7 +309,7 @@ export function WhyWiggle() {
             href="#projects"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900"
+            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 px-6 py-3 text-sm font-medium text-white dark:text-slate-900 shadow-lg shadow-slate-900/20 dark:shadow-none transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:hover:shadow-brand-400/20"
           >
             <span>Explore my work</span>
             <motion.span
