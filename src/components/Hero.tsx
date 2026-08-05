@@ -1,7 +1,7 @@
-// src/components/sections/Hero.tsx
+// src/components/Hero.tsx
 'use client';
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence, Variants } from 'framer-motion';
 import {
   ArrowDown,
   Download,
@@ -69,29 +69,29 @@ export function Hero() {
     { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/brightwell_d' },
   ];
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper typing
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
         delayChildren: 0.1,
-        ease: [0.22, 1, 0.36, 1],
+        ease: 'easeInOut', // Changed from array to string
       },
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: 'easeInOut' }, // Changed from array to string
     },
   };
 
-  const floatVariants = {
+  const floatVariants: Variants = {
     initial: { y: 0 },
     animate: {
       y: [0, -10, 0],
@@ -103,7 +103,7 @@ export function Hero() {
     },
   };
 
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     initial: { scale: 1, opacity: 0.6 },
     animate: {
       scale: [1, 1.1, 1],
@@ -226,7 +226,7 @@ export function Hero() {
                     className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
                     initial={{ width: 0 }}
                     animate={{ width: '100%' }}
-                    transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.5, duration: 0.8, ease: 'easeInOut' }}
                   />
                 </span>{' '}
                 Dlamini here.
@@ -245,7 +245,7 @@ export function Hero() {
                   className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-brand-400/60 dark:bg-brand-500/40"
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
+                  transition={{ delay: 0.8, duration: 0.6, ease: 'easeInOut' }}
                 />
               </span>
               . Wiggle&apos;s brief asks for people who can design interfaces, ship full‑stack
@@ -458,7 +458,7 @@ export function Hero() {
                   className="absolute left-4 top-1/3 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
+                  transition={{ delay: 0.5, duration: 0.5, ease: 'easeInOut' }}
                 >
                   React · Next.js
                 </motion.div>
@@ -466,7 +466,7 @@ export function Hero() {
                   className="absolute right-4 top-1/4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.7, duration: 0.5 }}
+                  transition={{ delay: 0.7, duration: 0.5, ease: 'easeInOut' }}
                 >
                   TypeScript
                 </motion.div>
@@ -474,7 +474,7 @@ export function Hero() {
                   className="absolute bottom-1/4 left-6 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.9, duration: 0.5 }}
+                  transition={{ delay: 0.9, duration: 0.5, ease: 'easeInOut' }}
                 >
                   UI/UX
                 </motion.div>
@@ -482,7 +482,7 @@ export function Hero() {
                   className="absolute bottom-8 right-8 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 1.1, duration: 0.5 }}
+                  transition={{ delay: 1.1, duration: 0.5, ease: 'easeInOut' }}
                 >
                   Tailwind
                 </motion.div>
@@ -493,7 +493,7 @@ export function Hero() {
                 className="mt-4 h-1 w-full rounded-full bg-gradient-to-r from-brand-400 via-accent-400 to-brand-400"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ delay: 0.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.8, duration: 0.8, ease: 'easeInOut' }}
               />
             </div>
           </motion.div>
