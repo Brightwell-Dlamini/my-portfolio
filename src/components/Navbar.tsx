@@ -177,7 +177,7 @@ export function Navbar() {
           WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
         }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 lg:px-8">
           {/* Logo with animated glow */}
           <motion.a
             href="#"
@@ -204,7 +204,9 @@ export function Navbar() {
                 className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300 group-hover:w-full"
               />
             </span>
-           
+            <span className="text-brand-600 transition-colors group-hover:text-accent-500 dark:text-brand-400 dark:group-hover:text-accent-400">
+              →Wiggle
+            </span>
             <motion.span
               className="absolute -inset-1 rounded-full bg-brand-500/0 blur-xl transition-all duration-500 group-hover:bg-brand-500/10 dark:group-hover:bg-brand-400/10"
             />
@@ -225,7 +227,7 @@ export function Navbar() {
                   whileHover="hover"
                   whileTap="tap"
                   className={cn(
-                    "relative rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-200",
+                    "relative rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200",
                     isActive
                       ? "text-brand-600 dark:text-brand-400"
                       : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
@@ -263,7 +265,7 @@ export function Navbar() {
             {/* CV Download Button with shine effect */}
             <motion.a
               href="/resume"
-              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900 dark:shadow-none dark:hover:shadow-brand-400/20"
+              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-3.5 py-1.5 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900 dark:shadow-none dark:hover:shadow-brand-400/20"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -395,7 +397,7 @@ export function Navbar() {
       </motion.header>
 
       {/* Spacer to prevent content from hiding under fixed header */}
-      <div className="h-16" />
+      <div className="h-14 lg:h-16" />
     </>
   );
 }
