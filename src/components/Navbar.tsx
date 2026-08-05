@@ -2,12 +2,10 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { Menu, X, Download, Sparkles, ChevronRight, Home, User, Briefcase, Layers, Mail, Award, Zap } from 'lucide-react';
+import { Menu, X, Download, Sparkles, Home, User, Briefcase, Layers, Mail, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './ThemeToggle';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 const links = [
   { href: '#why', label: 'Why Wiggle', icon: Sparkles },
@@ -25,7 +23,6 @@ export function Navbar() {
   const [lastY, setLastY] = useState(0);
   const [activeSection, setActiveSection] = useState('');
   const headerRef = useRef<HTMLElement>(null);
-  const pathname = usePathname();
 
   // Enhanced scroll handling with throttling
   useEffect(() => {
@@ -61,7 +58,6 @@ export function Navbar() {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
@@ -90,27 +86,30 @@ export function Navbar() {
     };
   }, [open]);
 
-  // Animation variants
-  const navVariants = {
-    hidden: { y: -100, opacity: 0 },
+  // Animation variants with proper typing
+  const navVariants: Variants = {
+    hidden: { 
+      y: -100, 
+      opacity: 0 
+    },
     visible: { 
       y: 0, 
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 300,
         damping: 30,
       }
     },
   };
 
-  const mobileMenuVariants = {
+  const mobileMenuVariants: Variants = {
     closed: { 
       opacity: 0,
       y: -20,
       height: 0,
       transition: {
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 400,
         damping: 35,
       }
@@ -118,9 +117,9 @@ export function Navbar() {
     open: { 
       opacity: 1,
       y: 0,
-      height: 'auto',
+      height: "auto",
       transition: {
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 400,
         damping: 35,
         staggerChildren: 0.05,
@@ -129,27 +128,31 @@ export function Navbar() {
     },
   };
 
-  const mobileItemVariants = {
+  const mobileItemVariants: Variants = {
     closed: { opacity: 0, x: -20 },
     open: { opacity: 1, x: 0 },
   };
 
-  const linkVariants = {
+  const linkVariants: Variants = {
     initial: { scale: 1 },
     hover: { 
       scale: 1.05,
-      transition: { type: 'spring', stiffness: 400, damping: 25 }
+      transition: { 
+        type: "spring" as const, 
+        stiffness: 400, 
+        damping: 25 
+      }
     },
     tap: { scale: 0.95 },
   };
 
-  const indicatorVariants = {
+  const indicatorVariants: Variants = {
     hidden: { scale: 0, opacity: 0 },
     visible: { 
       scale: 1, 
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 500,
         damping: 30,
       }
@@ -201,9 +204,7 @@ export function Navbar() {
                 className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300 group-hover:w-full"
               />
             </span>
-            <span className="text-brand-600 transition-colors group-hover:text-accent-500 dark:text-brand-400 dark:group-hover:text-accent-400">
-              →Wiggle
-            </span>
+           
             <motion.span
               className="absolute -inset-1 rounded-full bg-brand-500/0 blur-xl transition-all duration-500 group-hover:bg-brand-500/10 dark:group-hover:bg-brand-400/10"
             />
