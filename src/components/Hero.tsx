@@ -2,6 +2,7 @@
 'use client';
 
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
+import Image from 'next/image';
 import {
   ArrowDown,
   Download,
@@ -312,8 +313,6 @@ export function Hero() {
                 </motion.span>
                 Download CV
               </motion.a>
-
-             
             </motion.div>
 
             {/* Contact Info */}
@@ -377,7 +376,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column - Visual */}
+          {/* Right Column - Visual with Photo */}
           <motion.div
             variants={itemVariants}
             className="relative flex items-center justify-center lg:justify-end"
@@ -413,28 +412,34 @@ export function Hero() {
                 </div>
               </motion.div>
 
-              {/* Profile Image Container */}
+              {/* Profile Image Container with Real Photo */}
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 dark:from-brand-950 dark:to-accent-950 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl font-bold text-slate-300 dark:text-slate-700">
-                    BD
-                  </span>
-                </div>
+                {/* Your Photo */}
+                <Image
+                  src="/download.jpeg"
+                  alt="Brightwell Dlamini - Full-Stack Developer & UI/UX Designer"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="(max-width: 768px) 80vw, 400px"
+                />
+                
+                {/* Subtle gradient overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent pointer-events-none" />
 
-                {/* Decorative rings */}
+                {/* Decorative rings - keep them for visual interest */}
                 <motion.div
-                  className="absolute -inset-4 rounded-full border border-brand-300/20 dark:border-brand-700/20"
+                  className="absolute -inset-4 rounded-full border border-brand-300/20 dark:border-brand-700/20 pointer-events-none"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
                 />
                 <motion.div
-                  className="absolute -inset-8 rounded-full border border-brand-300/10 dark:border-brand-700/10"
+                  className="absolute -inset-8 rounded-full border border-brand-300/10 dark:border-brand-700/10 pointer-events-none"
                   animate={{ rotate: -360 }}
                   transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
                 />
 
-                {/* Floating Tech Tags */}
+                {/* Floating Tech Tags - kept for context */}
                 <motion.div
                   className="absolute left-3 top-1/3 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-300 shadow-lg backdrop-blur-sm"
                   initial={{ x: -20, opacity: 0 }}
