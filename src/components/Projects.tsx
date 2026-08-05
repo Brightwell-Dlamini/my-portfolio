@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
 const projects = [
@@ -5,7 +8,7 @@ const projects = [
     title: "SiyaTrades",
     tagline: "Trading journal & discipline system",
     description:
-      "Full-stack product: MT5 import, P&L views, playbook analytics and multi-account support. Shows data-heavy UX and serious full-stack delivery.",
+      "Full-stack product: MT5 import, P&L views, playbook analytics and multi-account support. Data-heavy UX with serious delivery depth.",
     stack: ["Next.js", "TypeScript", "Supabase"],
     live: "https://siya-trades.vercel.app",
     repo: "https://github.com/Brightwell-Dlamini/SiyaTrades",
@@ -15,7 +18,7 @@ const projects = [
     title: "SwaziRent (Ekhaya)",
     tagline: "Property marketplace for Eswatini",
     description:
-      "Roles, verification, maps and listing flows aimed at the local market — the kind of product work a digital agency ships for real clients.",
+      "Roles, verification, maps and listing flows for the local market — the kind of product work an agency ships for real clients.",
     stack: ["Next.js", "Supabase", "Mapbox"],
     live: "https://ekhayalistings.vercel.app",
     repo: "https://github.com/Brightwell-Dlamini/swazirent-main",
@@ -45,46 +48,56 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-16 sm:py-24">
+    <section id="projects" className="py-20 sm:py-28 bg-slate-100/70 dark:bg-slate-900/40">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-brand-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">
             Evidence
-          </h2>
-          <p className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Live projects you can open now
           </p>
-          <p className="mt-4 text-slate-400">
-            Click through the demos. Source is on GitHub. This is the portfolio behind the
-            application.
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Live projects
+          </h2>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
+            Open the demos. Source is on GitHub.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {projects.map((p) => (
-            <article
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          {projects.map((p, i) => (
+            <motion.article
               key={p.title}
-              className="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/70 p-6 sm:p-8"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="card-surface group flex flex-col rounded-2xl p-6 sm:p-8 transition duration-300 hover:-translate-y-0.5"
             >
-              <span className="w-fit rounded-full bg-brand-500/10 px-2.5 py-0.5 text-xs font-medium text-brand-300">
+              <span className="w-fit rounded-full bg-brand-500/10 px-2.5 py-0.5 text-xs font-medium text-brand-700 dark:text-brand-300">
                 {p.fit}
               </span>
-              <h3 className="mt-3 text-xl font-semibold text-white">{p.title}</h3>
-              <p className="text-sm text-slate-400">{p.tagline}</p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{p.description}</p>
+              <h3 className="mt-3 text-xl font-semibold text-slate-900 transition group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300">
+                {p.title}
+              </h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{p.tagline}</p>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                {p.description}
+              </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {p.stack.map((t) => (
-                  <span key={t} className="rounded-md bg-slate-800 px-2 py-0.5 text-xs text-slate-300">
+                  <span
+                    key={t}
+                    className="rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                  >
                     {t}
                   </span>
                 ))}
               </div>
-              <div className="mt-5 flex gap-4 border-t border-slate-800 pt-4">
+              <div className="mt-5 flex gap-4 border-t border-slate-200/80 pt-4 dark:border-slate-700/80">
                 <a
                   href={p.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-400 hover:text-brand-300"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
                 >
                   <ExternalLink size={14} /> Live demo
                 </a>
@@ -92,12 +105,12 @@ export function Projects() {
                   href={p.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white"
+                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white"
                 >
                   <Github size={14} /> Source
                 </a>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,18 +1,14 @@
 # Brightwell Dlamini → Wiggle Digital Eswatini
 
-**This site is the job application.**
-
-Built specifically for the UX/UI Designer, Full-Stack Developer and CMS Specialist openings at Wiggle Digital Eswatini (deadline 7 August 2026).
+Application site for the UX/UI Designer, Full-Stack Developer and CMS Specialist roles.
 
 ## Deploy
 
-Import this repo on Vercel (Framework: Next.js). No env vars required.
-
-Then email **admin@wiggledigital.co.sz** a short note + the live URL.
+Import on Vercel (Framework: Next.js). No env vars.
 
 ## Stack
 
-Next.js 15 · TypeScript · Tailwind CSS v4
+Next.js 15 · TypeScript · Tailwind v4 · next-themes · Framer Motion
 
 ## Contact
 
