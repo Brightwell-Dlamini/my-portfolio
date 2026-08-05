@@ -17,11 +17,11 @@ export default function Home() {
       <WhyWiggle />
        <Skills />
       <Projects />
+       <Roles />
       <About />
-      <Roles />
-      <Experience />
      
-      <Contact />
+      <Experience />
+           <Contact />
       <Footer />
     </main>
   );
