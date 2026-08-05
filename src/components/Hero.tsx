@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 'use client';
 
-import { motion, useScroll, useTransform, AnimatePresence, Variants } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import {
   ArrowDown,
   Download,
@@ -14,29 +14,23 @@ import {
   Linkedin,
   Twitter,
   MapPin,
-  Briefcase,
   Award,
   Code2,
-  Palette,
   Layers,
-  Rocket,
   Star,
   Zap,
 } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useState, useRef } from 'react';
 
 export function Hero() {
-  const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
   // Parallax scroll effects
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
-  const yOffset = useTransform(scrollY, [0, 300], [0, 60]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0.8]);
+  const scale = useTransform(scrollY, [0, 400], [1, 0.98]);
+  const yOffset = useTransform(scrollY, [0, 300], [0, 30]);
 
   // Mouse tracking for 3D tilt
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -54,12 +48,12 @@ export function Hero() {
     setMousePosition({ x: 0, y: 0 });
   };
 
-  // Stats data with animations
+  // ✅ CORRECTED STATS - based on your feedback
   const stats = [
     { label: 'Years Experience', value: '8+', icon: Award },
-    { label: 'Projects Delivered', value: '47', icon: Code2 },
-    { label: 'Satisfied Clients', value: '32', icon: Star },
-    { label: 'Tech Stack Mastery', value: '12+', icon: Layers },
+    { label: 'Projects Delivered', value: '5+', icon: Code2 },
+    { label: 'Tech Stack Mastery', value: '5+', icon: Layers },
+    { label: 'Happy Clients', value: '3+', icon: Star },
   ];
 
   // Social links
@@ -77,7 +71,7 @@ export function Hero() {
       transition: {
         staggerChildren: 0.08,
         delayChildren: 0.1,
-        ease: 'easeInOut', // Changed from array to string
+        ease: 'easeInOut',
       },
     },
   };
@@ -87,7 +81,7 @@ export function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeInOut' }, // Changed from array to string
+      transition: { duration: 0.6, ease: 'easeInOut' },
     },
   };
 
@@ -121,7 +115,7 @@ export function Hero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100/50 dark:from-slate-950 dark:via-slate-900 dark:to-black"
+      className="relative min-h-[calc(100vh-3.5rem)] lg:min-h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100/50 dark:from-slate-950 dark:via-slate-900 dark:to-black flex items-center"
     >
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -190,18 +184,18 @@ export function Hero() {
       {/* Main Content */}
       <motion.div
         style={{ opacity, scale, y: yOffset }}
-        className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:pt-36 sm:pb-24"
+        className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12 lg:py-16"
       >
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
+          className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 items-center"
         >
           {/* Left Column - Content */}
           <div className="flex flex-col justify-center">
             {/* Status Badge */}
-            <motion.div variants={itemVariants} className="mb-6">
+            <motion.div variants={itemVariants} className="mb-4">
               <div className="inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/70 px-4 py-1.5 text-xs font-medium tracking-wider text-slate-600 shadow-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 dark:text-slate-300">
                 <motion.span
                   className="relative flex h-2 w-2"
@@ -217,13 +211,13 @@ export function Hero() {
             </motion.div>
 
             {/* Main Heading */}
-            <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1] dark:text-white">
+            <motion.div variants={itemVariants} className="space-y-3">
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
                 Hi,{' '}
                 <span className="relative inline-block">
                   Brightwell
                   <motion.span
-                    className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
+                    className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
                     initial={{ width: 0 }}
                     animate={{ width: '100%' }}
                     transition={{ delay: 0.5, duration: 0.8, ease: 'easeInOut' }}
@@ -236,7 +230,7 @@ export function Hero() {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300"
+              className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base dark:text-slate-300"
             >
               I think I&apos;m the best fit for{' '}
               <span className="relative inline-block font-semibold text-slate-900 dark:text-white">
@@ -254,10 +248,10 @@ export function Hero() {
               honest proof and a direct path to conversation.
             </motion.p>
 
-            {/* Stats Grid */}
+            {/* Stats Grid - CORRECTED */}
             <motion.div
               variants={itemVariants}
-              className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
+              className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3"
             >
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
@@ -265,7 +259,7 @@ export function Hero() {
                   <motion.div
                     key={index}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="rounded-xl border border-slate-200/70 bg-white/60 p-3 backdrop-blur-sm transition-all hover:shadow-md dark:border-slate-700/70 dark:bg-slate-900/40"
+                    className="rounded-xl border border-slate-200/70 bg-white/60 p-2.5 backdrop-blur-sm transition-all hover:shadow-md dark:border-slate-700/70 dark:bg-slate-900/40"
                   >
                     <div className="flex items-center gap-2">
                       <Icon className="h-4 w-4 text-brand-500 dark:text-brand-400" />
@@ -273,7 +267,7 @@ export function Hero() {
                         <div className="text-lg font-bold text-slate-900 dark:text-white">
                           {stat.value}
                         </div>
-                        <div className="text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        <div className="text-[9px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
                           {stat.label}
                         </div>
                       </div>
@@ -286,13 +280,13 @@ export function Hero() {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 flex flex-wrap items-center gap-3"
+              className="mt-6 flex flex-wrap items-center gap-2"
             >
               <motion.a
                 href="#projects"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-xl hover:shadow-brand-500/35 dark:from-brand-500 dark:to-brand-400"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-xl hover:shadow-brand-500/35 dark:from-brand-500 dark:to-brand-400"
               >
                 <span>See the work</span>
                 <motion.span
@@ -308,7 +302,7 @@ export function Hero() {
                 href="/resume"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur transition-all hover:border-brand-300 hover:bg-white hover:text-brand-700 hover:shadow-md dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:border-brand-500/50 dark:hover:text-brand-300"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur transition-all hover:border-brand-300 hover:bg-white hover:text-brand-700 hover:shadow-md dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:border-brand-500/50 dark:hover:text-brand-300"
               >
                 <motion.span
                   animate={{ y: [0, -3, 0] }}
@@ -323,7 +317,7 @@ export function Hero() {
                 href="#contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               >
                 Contact
                 <motion.span
@@ -338,7 +332,7 @@ export function Hero() {
             {/* Contact Info */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-500 dark:text-slate-400"
+              className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500 dark:text-slate-400"
             >
               <motion.a
                 href="mailto:dlaminibrightwell@gmail.com"
@@ -346,7 +340,7 @@ export function Hero() {
                 className="inline-flex items-center gap-2 transition-all hover:text-brand-600 dark:hover:text-brand-400"
               >
                 <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <Mail size={14} className="text-brand-500" />
+                  <Mail size={13} className="text-brand-500" />
                 </div>
                 dlaminibrightwell@gmail.com
               </motion.a>
@@ -356,7 +350,7 @@ export function Hero() {
                 className="inline-flex items-center gap-2 transition-all hover:text-brand-600 dark:hover:text-brand-400"
               >
                 <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <Phone size={14} className="text-brand-500" />
+                  <Phone size={13} className="text-brand-500" />
                 </div>
                 +268 7636 5539
               </motion.a>
@@ -365,7 +359,7 @@ export function Hero() {
                 className="inline-flex items-center gap-2"
               >
                 <div className="rounded-full bg-brand-100/50 p-1 dark:bg-brand-900/30">
-                  <MapPin size={14} className="text-brand-500" />
+                  <MapPin size={13} className="text-brand-500" />
                 </div>
                 Mankayane, Eswatini
               </motion.span>
@@ -374,7 +368,7 @@ export function Hero() {
             {/* Social Links */}
             <motion.div
               variants={itemVariants}
-              className="mt-6 flex items-center gap-4"
+              className="mt-4 flex items-center gap-3"
             >
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
@@ -386,7 +380,7 @@ export function Hero() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-full bg-white/60 p-2.5 text-slate-600 shadow-sm backdrop-blur transition-all hover:bg-brand-50 hover:text-brand-600 dark:bg-slate-900/40 dark:text-slate-300 dark:hover:bg-brand-900/30 dark:hover:text-brand-400"
+                    className="rounded-full bg-white/60 p-2 text-slate-600 shadow-sm backdrop-blur transition-all hover:bg-brand-50 hover:text-brand-600 dark:bg-slate-900/40 dark:text-slate-300 dark:hover:bg-brand-900/30 dark:hover:text-brand-400"
                     aria-label={social.name}
                   >
                     <Icon className="h-4 w-4" />
@@ -401,16 +395,16 @@ export function Hero() {
             variants={itemVariants}
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-sm">
               {/* Floating Elements */}
               <motion.div
                 variants={floatVariants}
                 initial="initial"
                 animate="animate"
-                className="absolute -top-8 -left-8 z-10 rounded-xl bg-white/80 p-3 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
+                className="absolute -top-6 -left-6 z-10 rounded-xl bg-white/80 p-2.5 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
               >
                 <div className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-amber-400" />
+                  <Sparkles className="h-4 w-4 text-amber-400" />
                   <span className="text-sm font-medium text-slate-900 dark:text-white">
                     8+ Years
                   </span>
@@ -422,12 +416,12 @@ export function Hero() {
                 initial="initial"
                 animate="animate"
                 transition={{ delay: 0.5 }}
-                className="absolute -bottom-4 -right-4 z-10 rounded-xl bg-white/80 p-3 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
+                className="absolute -bottom-4 -right-4 z-10 rounded-xl bg-white/80 p-2.5 shadow-lg backdrop-blur-sm dark:bg-slate-900/80 dark:shadow-xl"
               >
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-emerald-400" />
+                  <CheckCircle className="h-4 w-4 text-emerald-400" />
                   <span className="text-sm font-medium text-slate-900 dark:text-white">
-                    47 Projects
+                    5+ Projects
                   </span>
                 </div>
               </motion.div>
@@ -436,7 +430,7 @@ export function Hero() {
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 shadow-2xl dark:from-brand-950 dark:to-accent-950">
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-7xl font-bold text-slate-300 dark:text-slate-700">
+                  <span className="text-6xl font-bold text-slate-300 dark:text-slate-700">
                     BD
                   </span>
                 </div>
@@ -455,7 +449,7 @@ export function Hero() {
 
                 {/* Floating Tech Tags */}
                 <motion.div
-                  className="absolute left-4 top-1/3 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute left-3 top-1/3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.5, ease: 'easeInOut' }}
@@ -463,7 +457,7 @@ export function Hero() {
                   React · Next.js
                 </motion.div>
                 <motion.div
-                  className="absolute right-4 top-1/4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute right-3 top-1/4 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.5, ease: 'easeInOut' }}
@@ -471,7 +465,7 @@ export function Hero() {
                   TypeScript
                 </motion.div>
                 <motion.div
-                  className="absolute bottom-1/4 left-6 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute bottom-1/4 left-4 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.5, ease: 'easeInOut' }}
@@ -479,7 +473,7 @@ export function Hero() {
                   UI/UX
                 </motion.div>
                 <motion.div
-                  className="absolute bottom-8 right-8 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
+                  className="absolute bottom-6 right-6 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-medium shadow-lg backdrop-blur-sm dark:bg-slate-900/90"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.1, duration: 0.5, ease: 'easeInOut' }}
@@ -490,7 +484,7 @@ export function Hero() {
 
               {/* Bottom decoration line */}
               <motion.div
-                className="mt-4 h-1 w-full rounded-full bg-gradient-to-r from-brand-400 via-accent-400 to-brand-400"
+                className="mt-3 h-1 w-full rounded-full bg-gradient-to-r from-brand-400 via-accent-400 to-brand-400"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.8, duration: 0.8, ease: 'easeInOut' }}
@@ -501,15 +495,15 @@ export function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 8, 0] }}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-xs uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500">
-              Scroll to explore
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-[10px] uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500">
+              Scroll
             </span>
-            <ArrowDown className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+            <ArrowDown className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
           </div>
         </motion.div>
       </motion.div>
