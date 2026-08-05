@@ -161,7 +161,7 @@ export function About() {
               variants={textVariants}
               className="text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400"
             >
-              I first encountered computer science as the <span className="font-semibold text-slate-900 dark:text-white">"most difficult"</span> combination the University of Eswatini offered. Intrigued by the challenge, I dove in — having never used a computer before.
+              I first encountered computer science as the <span className="font-semibold text-slate-900 dark:text-white">&quot;most difficult&quot;</span> combination the University of Eswatini offered. Intrigued by the challenge, I dove in — having never used a computer before.
             </motion.p>
 
             <motion.p
@@ -208,7 +208,7 @@ export function About() {
                 whileTap={{ scale: 0.98 }}
                 className="group inline-flex items-center gap-2 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
               >
-                <span>Let's connect</span>
+                <span>Let&apos;s connect</span>
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
