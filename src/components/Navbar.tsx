@@ -30,7 +30,6 @@ export function Navbar() {
   // Enhanced scroll handling with throttling
   useEffect(() => {
     let ticking = false;
-    let scrollTimeout: NodeJS.Timeout;
 
     const onScroll = () => {
       if (ticking) return;
@@ -62,10 +61,9 @@ export function Navbar() {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     
-    // Cleanup timeout on unmount
+    // Cleanup
     return () => {
       window.removeEventListener('scroll', onScroll);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [lastY]);
 
