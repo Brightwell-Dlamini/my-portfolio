@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,12 +12,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Brightwell Dlamini → Wiggle Digital Eswatini",
   description:
-    "Application from Brightwell Dlamini for UX/UI Designer, Full-Stack Developer and CMS Specialist roles at Wiggle Digital Eswatini. Everything you need to evaluate the application is on this page.",
+    "Brightwell Dlamini — application for UX/UI Designer, Full-Stack Developer and CMS Specialist at Wiggle Digital Eswatini.",
   authors: [{ name: "Brightwell Dlamini" }],
   openGraph: {
     title: "Brightwell Dlamini → Wiggle Digital",
     description:
-      "Full application for UX/UI, Full-Stack and CMS roles — story, experience, projects and contact.",
+      "Story, role fit, experience, live projects and contact for Wiggle Digital Eswatini.",
     type: "website",
     locale: "en_SZ",
   },
@@ -26,9 +27,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans bg-slate-950 text-slate-100 antialiased`}>
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} font-sans bg-slate-50 text-slate-900 antialiased transition-colors dark:bg-slate-950 dark:text-slate-100`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
