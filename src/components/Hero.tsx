@@ -233,7 +233,7 @@ export function Hero() {
               variants={itemVariants}
               className="mt-4 max-w-xl text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base"
             >
-              I think I&apos;m the best fit for{' '}
+              I think I'm the best fit for{' '}
               <span className="relative inline-block font-semibold text-slate-900 dark:text-white">
                 Wiggle Digital
                 <motion.span
@@ -243,7 +243,7 @@ export function Hero() {
                   transition={{ delay: 0.8, duration: 0.6, ease: 'easeInOut' }}
                 />
               </span>
-              . Wiggle&apos;s brief asks for people who can design interfaces, ship full‑stack
+              . Wiggle's brief asks for people who can design interfaces, ship full‑stack
               products and own content systems. That is exactly the mix I practise — and the reason
               this application is structured the way a digital product would be: clear hierarchy,
               honest proof and a direct path to conversation.
@@ -416,7 +416,7 @@ export function Hero() {
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 dark:from-brand-950 dark:to-accent-950 shadow-2xl">
                 {/* Your Photo */}
                 <Image
-                src="../app/download.jpeg"
+                src="/download.jpeg"
                   alt="Brightwell Dlamini - Full-Stack Developer & UI/UX Designer"
                   fill
                   className="object-cover object-center"
