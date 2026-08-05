@@ -1,16 +1,20 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 const roles = [
   {
     title: "UX/UI Designer",
     points: [
-      "User-centred interfaces on real products (trading tools, property search, admin dashboards)",
+      "User-centred interfaces on real products — trading tools, property search, admin dashboards",
       "Mobile-first, accessible patterns and clear visual hierarchy",
-      "Comfortable moving from problem → wireflow → polished UI in code",
+      "Problem → flow → polished UI in the same codebase that ships",
     ],
   },
   {
     title: "Full-Stack Developer",
     points: [
-      "Next.js 15, TypeScript, Supabase, auth, roles and production deploys on Vercel",
+      "Next.js 15, TypeScript, Supabase, auth, roles and Vercel production",
       "End-to-end ownership: SiyaTrades, SwaziRent, LocalMarket",
       "Agency and systems experience (Sm3, McVillan, Luke Commission)",
     ],
@@ -19,7 +23,7 @@ const roles = [
     title: "CMS Specialist",
     points: [
       "Content models, draft/publish flows, media libraries (ForgeCMS)",
-      "Admin UX that non-developers can actually use",
+      "Admin UX non-developers can use",
       "E-commerce product admin and editorial-style workflows",
     ],
   },
@@ -27,37 +31,40 @@ const roles = [
 
 export function Roles() {
   return (
-    <section id="roles" className="py-16 sm:py-24 bg-slate-900/40">
+    <section id="roles" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-brand-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">
             Role fit
-          </h2>
-          <p className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
             How I map to your three openings
-          </p>
-          <p className="mt-4 text-slate-400">
-            One candidate, three listed roles — because the work already spans design, engineering
-            and content systems.
-          </p>
+          </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {roles.map((role) => (
-            <div
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {roles.map((role, i) => (
+            <motion.div
               key={role.title}
-              className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 flex flex-col"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07 }}
+              className="card-surface flex flex-col rounded-2xl p-6 sm:p-7"
             >
-              <h3 className="text-lg font-semibold text-white">{role.title}</h3>
-              <ul className="mt-4 space-y-3 flex-1">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{role.title}</h3>
+              <ul className="mt-5 flex-1 space-y-3">
                 {role.points.map((p) => (
-                  <li key={p} className="flex gap-2.5 text-sm text-slate-400">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
+                  <li
+                    key={p}
+                    className="flex gap-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
                     {p}
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
