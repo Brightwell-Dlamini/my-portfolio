@@ -405,7 +405,7 @@ export function Projects() {
             whileTap={{ scale: 0.98 }}
             className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900"
           >
-            <span>Let's build something together</span>
+            <span>Let&apos;s build something together</span>
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
