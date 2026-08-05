@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Brightwell Dlamini → Wiggle Digital Eswatini",
+  title: "Brightwell Dlamini",
   description:
     "Brightwell Dlamini — application for UX/UI Designer, Full-Stack Developer and CMS Specialist at Wiggle Digital Eswatini.",
   authors: [{ name: "Brightwell Dlamini" }],
