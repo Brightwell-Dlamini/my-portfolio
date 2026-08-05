@@ -1,17 +1,21 @@
-"use client";
+// src/components/layout/Navbar.tsx
+'use client';
 
-import { useEffect, useState } from "react";
-import { Menu, X, Download } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./ThemeToggle";
+import { useEffect, useState, useRef } from 'react';
+import { Menu, X, Download, Sparkles, ChevronRight, Home, User, Briefcase, Layers, Mail, Award, Zap } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { ThemeToggle } from './ThemeToggle';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
-  { href: "#why", label: "Why Wiggle" },
-  { href: "#about", label: "About" },
-  { href: "#roles", label: "Roles" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Work" },
-  { href: "#contact", label: "Contact" },
+  { href: '#why', label: 'Why Wiggle', icon: Sparkles },
+  { href: '#about', label: 'About', icon: User },
+  { href: '#roles', label: 'Roles', icon: Briefcase },
+  { href: '#experience', label: 'Experience', icon: Award },
+  { href: '#projects', label: 'Work', icon: Layers },
+  { href: '#contact', label: 'Contact', icon: Mail },
 ];
 
 export function Navbar() {
@@ -19,103 +23,380 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastY, setLastY] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
+  const headerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
+  // Enhanced scroll handling with throttling
   useEffect(() => {
     let ticking = false;
+    let scrollTimeout: NodeJS.Timeout;
+
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
+      
       requestAnimationFrame(() => {
         const y = window.scrollY;
-        setScrolled(y > 12);
-        setHidden(y > lastY && y > 80);
+        const isScrolled = y > 12;
+        const shouldHide = y > lastY && y > 80;
+        
+        setScrolled(isScrolled);
+        setHidden(shouldHide);
         setLastY(y);
+        
+        // Detect active section
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            currentSection = section.id;
+          }
+        });
+        setActiveSection(currentSection);
+        
         ticking = false;
       });
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Cleanup timeout on unmount
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
   }, [lastY]);
 
+  // Close mobile menu on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  // Animation variants
+  const navVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+      }
+    },
+  };
+
+  const mobileMenuVariants = {
+    closed: { 
+      opacity: 0,
+      y: -20,
+      height: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 35,
+      }
+    },
+    open: { 
+      opacity: 1,
+      y: 0,
+      height: 'auto',
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 35,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      }
+    },
+  };
+
+  const mobileItemVariants = {
+    closed: { opacity: 0, x: -20 },
+    open: { opacity: 1, x: 0 },
+  };
+
+  const linkVariants = {
+    initial: { scale: 1 },
+    hover: { 
+      scale: 1.05,
+      transition: { type: 'spring', stiffness: 400, damping: 25 }
+    },
+    tap: { scale: 0.95 },
+  };
+
+  const indicatorVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 500,
+        damping: 30,
+      }
+    },
+  };
+
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        hidden && !open ? "-translate-y-full" : "translate-y-0",
-        scrolled
-          ? "border-b border-slate-200/70 bg-white/70 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/70 dark:shadow-none"
-          : "bg-transparent"
-      )}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <a
-          href="#"
-          className="group text-sm font-semibold tracking-tight text-slate-900 dark:text-white"
-        >
-          Brightwell
-          <span className="text-brand-600 dark:text-brand-400 transition-colors group-hover:text-accent-500">
-            →Wiggle
-          </span>
-        </a>
-
-        <nav className="hidden items-center gap-1 lg:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="rounded-full px-3 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-white"
+    <>
+      <motion.header
+        ref={headerRef}
+        variants={navVariants}
+        initial="visible"
+        animate={hidden && !open ? 'hidden' : 'visible'}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled
+            ? "border-b border-slate-200/50 bg-white/80 backdrop-blur-xl shadow-lg shadow-slate-200/20 dark:border-slate-800/50 dark:bg-slate-950/80 dark:shadow-none"
+            : "bg-transparent"
+        )}
+        style={{
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+        }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+          {/* Logo with animated glow */}
+          <motion.a
+            href="#"
+            className="group relative flex items-center gap-2 text-sm font-semibold tracking-tight text-slate-900 dark:text-white"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <motion.div
+              className="relative"
+              animate={{
+                rotate: [0, -5, 0, 5, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
             >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="/resume"
-            className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-brand-600 dark:bg-white dark:text-slate-900 dark:hover:bg-brand-400"
-          >
-            <Download size={14} />
-            CV
-          </a>
-          <div className="ml-2">
-            <ThemeToggle />
-          </div>
-        </nav>
+              <Home className="h-4 w-4 text-brand-500 dark:text-brand-400" />
+            </motion.div>
+            <span className="relative">
+              Brightwell
+              <motion.span
+                className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300 group-hover:w-full"
+              />
+            </span>
+            <span className="text-brand-600 transition-colors group-hover:text-accent-500 dark:text-brand-400 dark:group-hover:text-accent-400">
+              →Wiggle
+            </span>
+            <motion.span
+              className="absolute -inset-1 rounded-full bg-brand-500/0 blur-xl transition-all duration-500 group-hover:bg-brand-500/10 dark:group-hover:bg-brand-400/10"
+            />
+          </motion.a>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            className="rounded-full p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {open && (
-        <div className="border-t border-slate-200/80 bg-white/95 px-4 py-4 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/95 lg:hidden">
-          <nav className="flex flex-col gap-1">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-0.5 lg:flex" role="navigation" aria-label="Main navigation">
+            {links.map((link) => {
+              const Icon = link.icon;
+              const isActive = activeSection === link.href.replace('#', '');
+              
+              return (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  variants={linkVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className={cn(
+                    "relative rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "text-brand-600 dark:text-brand-400"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  )}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span className="flex items-center gap-1.5">
+                    <Icon className="h-3.5 w-3.5" />
+                    {link.label}
+                  </span>
+                  
+                  {/* Active indicator with spring animation */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavDot"
+                      variants={indicatorVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="absolute -bottom-0.5 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
+                    />
+                  )}
+                  
+                  {/* Hover background */}
+                  {!isActive && (
+                    <motion.span
+                      className="absolute inset-0 rounded-full bg-slate-100/0 transition-colors duration-200 dark:bg-slate-800/0"
+                      whileHover={{ backgroundColor: 'rgba(241, 245, 249, 0.8)' }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  )}
+                </motion.a>
+              );
+            })}
+            
+            {/* CV Download Button with shine effect */}
+            <motion.a
               href="/resume"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-xl bg-slate-900 px-3 py-2.5 text-center text-sm font-medium text-white dark:bg-white dark:text-slate-900"
+              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900 dark:shadow-none dark:hover:shadow-brand-400/20"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
-              Download CV
-            </a>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
+              />
+              <motion.span
+                animate={{ y: [0, -2, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <Download size={14} />
+              </motion.span>
+              <span className="relative">CV</span>
+              <motion.span
+                className="absolute -inset-1 rounded-full bg-brand-500/0 blur-xl transition-all duration-500 group-hover:bg-brand-500/20 dark:group-hover:bg-brand-400/10"
+              />
+            </motion.a>
+
+            {/* Theme Toggle */}
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
           </nav>
+
+          {/* Mobile Controls */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            
+            <motion.button
+              type="button"
+              className="relative rounded-full p-2 text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              onClick={() => setOpen(!open)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <AnimatePresence mode="wait">
+                {open ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={20} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu with improved animations */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              variants={mobileMenuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="border-t border-slate-200/50 bg-white/95 backdrop-blur-xl dark:border-slate-800/50 dark:bg-slate-950/95 lg:hidden"
+            >
+              <nav className="flex flex-col gap-1 px-4 py-4" role="navigation" aria-label="Mobile navigation">
+                {links.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = activeSection === link.href.replace('#', '');
+                  
+                  return (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      variants={mobileItemVariants}
+                      whileHover={{ x: 5, backgroundColor: 'rgba(241, 245, 249, 0.8)' }}
+                      className={cn(
+                        "flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200",
+                        isActive
+                          ? "bg-brand-50 text-brand-600 dark:bg-brand-950/30 dark:text-brand-400"
+                          : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                      )}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      <Icon className={cn(
+                        "h-4 w-4",
+                        isActive ? "text-brand-500" : "text-slate-400"
+                      )} />
+                      {link.label}
+                      {isActive && (
+                        <motion.span
+                          className="ml-auto h-1.5 w-1.5 rounded-full bg-brand-500"
+                          layoutId="activeMobileDot"
+                        />
+                      )}
+                    </motion.a>
+                  );
+                })}
+                
+                <motion.a
+                  href="/resume"
+                  onClick={() => setOpen(false)}
+                  variants={mobileItemVariants}
+                  className="group relative mt-2 overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 px-3 py-3 text-center text-sm font-medium text-white transition-all hover:shadow-lg dark:from-white dark:to-slate-200 dark:text-slate-900"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
+                  />
+                  <span className="flex items-center justify-center gap-2">
+                    <Download size={16} />
+                    Download CV
+                  </span>
+                </motion.a>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
+      {/* Spacer to prevent content from hiding under fixed header */}
+      <div className="h-16" />
+    </>
   );
 }
