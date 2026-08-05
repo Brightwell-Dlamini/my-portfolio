@@ -416,7 +416,7 @@ export function Hero() {
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 to-accent-100 dark:from-brand-950 dark:to-accent-950 shadow-2xl">
                 {/* Your Photo */}
                 <Image
-                  src="/download.jpeg"
+                src="../app/download.jpeg"
                   alt="Brightwell Dlamini - Full-Stack Developer & UI/UX Designer"
                   fill
                   className="object-cover object-center"
