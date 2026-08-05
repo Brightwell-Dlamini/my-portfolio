@@ -9,20 +9,13 @@ import {
   Layout,
   Layers,
   ArrowRight,
-  CheckCircle,
   Zap,
-  Shield,
   Rocket,
-  Star,
-  Gem,
-  Heart,
-  Briefcase,
-  Monitor,
-  Database,
-  Users,
   Palette,
+  Database,
+  Briefcase,
+  Users,
   Server,
-  Globe,
 } from 'lucide-react';
 
 const cards = [
@@ -66,7 +59,7 @@ export function WhyWiggle() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Animation variants
+  // Animation variants with proper typing
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -74,7 +67,7 @@ export function WhyWiggle() {
       transition: {
         staggerChildren: 0.1,
         delayChildren: 0.2,
-        ease: [0.22, 1, 0.36, 1],
+        ease: 'easeInOut',
       },
     },
   };
@@ -84,7 +77,7 @@ export function WhyWiggle() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: 'easeInOut' },
     },
   };
 
@@ -94,7 +87,7 @@ export function WhyWiggle() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: 'easeInOut' },
     },
   };
 
@@ -103,11 +96,12 @@ export function WhyWiggle() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.4, ease: 'easeInOut' },
     },
   };
 
-  const floatVariants = {
+  // Fixed float variants with proper typing
+  const floatVariants: Variants = {
     initial: { y: 0 },
     animate: {
       y: [0, -8, 0],
@@ -179,7 +173,7 @@ export function WhyWiggle() {
                 className="absolute -bottom-2 left-0 h-1 w-24 rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
                 initial={{ width: 0 }}
                 animate={{ width: 96 }}
-                transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.3, duration: 0.8, ease: 'easeInOut' }}
               />
             </h2>
 
@@ -207,15 +201,14 @@ export function WhyWiggle() {
                 variants={cardVariants}
                 whileHover={{ 
                   y: -8,
-                  transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] }
+                  transition: { duration: 0.2, ease: 'easeInOut' }
                 }}
                 className="group relative"
               >
                 <div className={`
                   relative rounded-2xl border ${card.borderColor} ${card.bgColor}
                   p-6 backdrop-blur-sm transition-all duration-300
-                  hover:shadow-xl hover:shadow-${card.color.split(' ')[0]}/10
-                  dark:hover:shadow-${card.color.split(' ')[0]}/5
+                  hover:shadow-xl
                 `}>
                   {/* Animated background glow */}
                   <motion.div
@@ -235,7 +228,7 @@ export function WhyWiggle() {
                   >
                     <div className={`
                       rounded-xl p-2.5 bg-gradient-to-br ${card.color}
-                      shadow-lg shadow-${card.color.split(' ')[0]}/20
+                      shadow-lg
                     `}>
                       <Icon className="h-5 w-5 text-white" />
                     </div>
@@ -270,7 +263,7 @@ export function WhyWiggle() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.6, duration: 0.6, ease: 'easeInOut' }}
           className="mt-16"
         >
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -305,7 +298,7 @@ export function WhyWiggle() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.8, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.8, duration: 0.6, ease: 'easeInOut' }}
           className="mt-12 flex justify-center"
         >
           <motion.a
