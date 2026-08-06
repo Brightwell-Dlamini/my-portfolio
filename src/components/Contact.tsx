@@ -11,9 +11,7 @@ import {
   Download,
   Sparkles,
   ArrowRight,
-  Send,
   CheckCircle,
-  Zap,
   MessageCircle,
   Linkedin,
   Twitter,
@@ -21,8 +19,6 @@ import {
   Heart,
   Clock,
   Shield,
-  Rocket,
-  Users,
 } from 'lucide-react';
 
 export function Contact() {
@@ -30,7 +26,6 @@ export function Contact() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -38,7 +33,7 @@ export function Contact() {
       transition: {
         staggerChildren: 0.08,
         delayChildren: 0.2,
-        ease: 'easeInOut',
+        ease: 'easeOut',
       },
     },
   };
@@ -48,7 +43,7 @@ export function Contact() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeInOut' },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
@@ -58,7 +53,7 @@ export function Contact() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: 'easeInOut' },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
@@ -67,32 +62,7 @@ export function Contact() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.4, ease: 'easeInOut' },
-    },
-  };
-
-  const floatVariants: Variants = {
-    initial: { y: 0 },
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
-  const pulseVariants: Variants = {
-    initial: { scale: 1, opacity: 0.6 },
-    animate: {
-      scale: [1, 1.05, 1],
-      opacity: [0.6, 0.8, 0.6],
-      transition: {
-        duration: 2.5,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
+      transition: { duration: 0.4, ease: 'easeOut' },
     },
   };
 
@@ -108,8 +78,8 @@ export function Contact() {
     },
     {
       label: "Phone (Primary)",
-      value: "+268 7636 5539",
-      href: "tel:+26876365539",
+      value: "+268 7636 5430",
+      href: "tel:+26876365430",
       icon: Phone,
       color: "from-blue-500 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-950/20",
@@ -147,52 +117,13 @@ export function Contact() {
       id="contact"
       className="relative overflow-hidden py-20 sm:py-28 lg:py-32 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/50 dark:from-slate-950/30 dark:via-slate-900 dark:to-slate-950/30"
     >
-      {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Gradient Orbs */}
-        <motion.div
-          className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-brand-400/10 dark:bg-brand-600/10 blur-3xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -right-40 h-[400px] w-[400px] rounded-full bg-accent-500/10 dark:bg-accent-500/10 blur-3xl"
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/5 dark:bg-indigo-600/5 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-
-        {/* Subtle Grid Pattern */}
+        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-brand-400/10 dark:bg-brand-600/10 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-[400px] w-[400px] rounded-full bg-accent-500/10 dark:bg-accent-500/10 blur-3xl" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5Q0EzQUYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] bg-[length:60px_60px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Main Card */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -203,22 +134,9 @@ export function Contact() {
             variants={cardVariants}
             className="relative overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white/90 via-slate-50/90 to-brand-50/60 p-8 shadow-2xl shadow-slate-200/30 backdrop-blur-sm dark:border-slate-700/50 dark:from-slate-900/90 dark:via-slate-950/90 dark:to-brand-950/40 dark:shadow-none sm:p-12"
           >
-            {/* Decorative floating elements */}
-            <motion.div
-              variants={floatVariants}
-              initial="initial"
-              animate="animate"
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-400/20 blur-3xl dark:bg-brand-600/20"
-            />
-            <motion.div
-              variants={floatVariants}
-              initial="initial"
-              animate="animate"
-              transition={{ delay: 0.5 }}
-              className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-600/20"
-            />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-400/20 blur-3xl dark:bg-brand-600/20" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-600/20" />
 
-            {/* Header */}
             <motion.div variants={headerVariants} className="relative">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 px-3 py-1 text-xs font-medium tracking-wider text-slate-600 backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 dark:text-slate-300">
                 <Sparkles className="h-3 w-3 text-brand-500" />
@@ -226,13 +144,8 @@ export function Contact() {
               </div>
 
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
-                Let&apos;s talk
-                <motion.span
-                  className="absolute -bottom-2 left-0 h-1 w-24 rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
-                  initial={{ width: 0 }}
-                  animate={{ width: 96 }}
-                  transition={{ delay: 0.3, duration: 0.8, ease: 'easeInOut' }}
-                />
+                Let's talk
+                <span className="absolute -bottom-2 left-0 h-1 w-24 rounded-full bg-gradient-to-r from-brand-500 to-accent-500" />
               </h2>
 
               <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
@@ -242,7 +155,6 @@ export function Contact() {
               </p>
             </motion.div>
 
-            {/* Quick Response Indicators */}
             <motion.div
               variants={headerVariants}
               className="relative mt-4 flex flex-wrap items-center gap-4"
@@ -250,26 +162,23 @@ export function Contact() {
               {quickReplies.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    whileHover={{ scale: 1.05 }}
                     className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400"
                   >
                     <CheckCircle className="h-3.5 w-3.5 text-emerald-500" />
                     <span>{item.label}</span>
-                  </motion.div>
+                  </div>
                 );
               })}
             </motion.div>
 
-            {/* Contact Methods Grid */}
             <motion.div
               variants={containerVariants}
               className="relative mt-8 grid gap-3 sm:grid-cols-2"
             >
               {contactMethods.map((method, index) => {
                 const Icon = method.icon;
-                const isHovered = hoveredIndex === index;
 
                 return (
                   <motion.a
@@ -278,7 +187,7 @@ export function Contact() {
                     target={method.label === 'GitHub' ? '_blank' : undefined}
                     rel={method.label === 'GitHub' ? 'noopener noreferrer' : undefined}
                     variants={itemVariants}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
                       y: -2,
                       transition: { duration: 0.2 }
@@ -295,15 +204,6 @@ export function Contact() {
                       group overflow-hidden
                     `}
                   >
-                    {/* Animated background glow */}
-                    <motion.div
-                      className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{
-                        background: `radial-gradient(circle at 30% 50%, ${method.color.split(' ')[0].replace('from-', '')} 0%, transparent 70%)`,
-                        opacity: isHovered ? 0.08 : 0,
-                      }}
-                    />
-
                     <div className={`
                       relative rounded-lg p-1.5 bg-gradient-to-br ${method.color}
                       shadow-md transition-transform duration-300 group-hover:scale-110
@@ -320,65 +220,40 @@ export function Contact() {
                       </p>
                     </div>
 
-                    {/* Hover arrow */}
-                    <motion.span
-                      className="relative opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    >
+                    <span className="relative opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       <ArrowRight className="h-4 w-4 text-brand-500" />
-                    </motion.span>
-
-                    {/* Corner accent */}
-                    <motion.div
-                      className="absolute -right-1 -top-1 h-5 w-5 rounded-tr-2xl border-r-2 border-t-2 border-brand-300/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:border-brand-500/10"
-                    />
+                    </span>
                   </motion.a>
                 );
               })}
             </motion.div>
 
-            {/* Bottom Actions */}
             <motion.div
               variants={headerVariants}
               className="relative mt-8 flex flex-wrap items-center gap-4"
             >
-              <motion.a
+              <a
                 href="/resume"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:from-white dark:to-slate-200 dark:text-slate-900 hover:-translate-y-0.5"
               >
-                <motion.span
-                  animate={{ y: [0, -2, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <Download size={16} />
-                </motion.span>
+                <Download size={16} />
                 Download / print CV
-              </motion.a>
+              </a>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400"
-              >
+              <div className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                 <MapPin size={14} className="text-brand-500" />
                 Mankayane, Eswatini
-              </motion.div>
+              </div>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400"
-              >
+              <div className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
                 Available now
-              </motion.div>
+              </div>
             </motion.div>
 
-            {/* Additional Context */}
             <motion.div
               variants={headerVariants}
               className="relative mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-700/50"
