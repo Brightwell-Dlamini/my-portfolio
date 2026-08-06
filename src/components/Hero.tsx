@@ -100,12 +100,12 @@ export function Hero() {
               variants={itemVariants}
               className="mt-4 max-w-xl text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base"
             >
-              I think I'm the best fit for{' '}
+              I think I&apos;m the best fit for{' '}
               <span className="relative inline-block font-semibold text-slate-900 dark:text-white">
                 Wiggle Digital
                 <span className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-brand-400/60 dark:bg-brand-500/40" />
               </span>
-              . Wiggle's brief asks for people who can design interfaces, ship full‑stack
+              . Wiggle&apos;s brief asks for people who can design interfaces, ship full‑stack
               products and own content systems. That is exactly the mix I practise — and the reason
               this application is structured the way a digital product would be: clear hierarchy,
               honest proof and a direct path to conversation.
