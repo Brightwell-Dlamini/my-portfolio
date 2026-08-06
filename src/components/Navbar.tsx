@@ -19,12 +19,10 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const lastYRef = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
 
-  // Scroll handling — lastY stored in a ref so the effect does not re-subscribe on every scroll
+  // Scroll handling
   useEffect(() => {
     let ticking = false;
 
@@ -35,11 +33,8 @@ export function Navbar() {
       requestAnimationFrame(() => {
         const y = window.scrollY;
         const isScrolled = y > 12;
-        const shouldHide = y > lastYRef.current && y > 80;
 
         setScrolled(isScrolled);
-        setHidden(shouldHide);
-        lastYRef.current = y;
 
         const sections = document.querySelectorAll('section[id]');
         let currentSection = '';
@@ -121,15 +116,15 @@ export function Navbar() {
         ref={headerRef}
         variants={navVariants}
         initial="visible"
-        animate={hidden && !open ? 'hidden' : 'visible'}
+        animate="visible"
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'border-b border-slate-200/50 dark:border-slate-800/50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-lg shadow-slate-200/20 dark:shadow-none'
-            : 'bg-transparent'
+            ? 'border-b border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-lg shadow-slate-200/20 dark:shadow-slate-900/50'
+            : 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200/30 dark:border-slate-800/30'
         )}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <a
             href="#"
             className="group relative flex items-center gap-2 text-sm font-semibold tracking-tight text-slate-900 dark:text-white"
@@ -141,7 +136,7 @@ export function Navbar() {
             </span>
           </a>
 
-          <nav className="hidden items-center gap-0.5 lg:flex" role="navigation" aria-label="Main navigation">
+          <nav className="hidden items-center gap-1 lg:flex" role="navigation" aria-label="Main navigation">
             {links.map((link) => {
               const Icon = link.icon;
               const isActive = activeSection === link.href.replace('#', '');
@@ -151,17 +146,17 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'relative rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200',
+                    'relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
                     isActive
-                      ? 'text-brand-600 dark:text-brand-400'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-brand-50 dark:bg-brand-950/30 text-brand-700 dark:text-brand-300'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white'
                   )}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex items-center gap-2">
                     <Icon
                       className={cn(
-                        'h-3.5 w-3.5',
+                        'h-4 w-4',
                         isActive ? 'text-brand-600 dark:text-brand-400' : 'text-slate-500 dark:text-slate-400'
                       )}
                     />
@@ -176,9 +171,9 @@ export function Navbar() {
 
             <a
               href="/resume"
-              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 px-3.5 py-1.5 text-sm font-medium text-white dark:text-slate-900 shadow-lg shadow-slate-900/20 dark:shadow-none transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:hover:shadow-brand-400/20"
+              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 px-4 py-2 text-sm font-medium text-white dark:text-slate-900 shadow-lg shadow-slate-900/20 dark:shadow-none transition-all hover:shadow-xl hover:shadow-slate-900/30 dark:hover:shadow-brand-400/20"
             >
-              <Download size={14} className="text-white dark:text-slate-900" />
+              <Download size={15} className="text-white dark:text-slate-900" />
               <span className="relative">CV</span>
             </a>
 
@@ -221,16 +216,16 @@ export function Navbar() {
                       onClick={() => setOpen(false)}
                       variants={mobileItemVariants}
                       className={cn(
-                        'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200',
+                        'flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-all duration-200',
                         isActive
-                          ? 'bg-brand-50 dark:bg-brand-950/30 text-brand-600 dark:text-brand-400'
+                          ? 'bg-brand-50 dark:bg-brand-950/30 text-brand-700 dark:text-brand-300'
                           : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
                       <Icon
                         className={cn(
-                          'h-4 w-4',
+                          'h-5 w-5',
                           isActive ? 'text-brand-500 dark:text-brand-400' : 'text-slate-400 dark:text-slate-500'
                         )}
                       />
@@ -243,7 +238,7 @@ export function Navbar() {
                   href="/resume"
                   onClick={() => setOpen(false)}
                   variants={mobileItemVariants}
-                  className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 px-3 py-3 text-sm font-medium text-white dark:text-slate-900"
+                  className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 px-4 py-3.5 text-sm font-medium text-white dark:text-slate-900"
                 >
                   <Download size={16} />
                   Download CV
