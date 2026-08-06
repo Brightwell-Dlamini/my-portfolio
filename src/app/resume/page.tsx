@@ -24,7 +24,7 @@ export default function ResumePage() {
             Full-Stack Developer · UX/UI Designer · CMS Specialist
           </p>
           <p className="mt-2 text-sm text-slate-600">
-            Mankayane, Eswatini · +268 7636 5539 / +268 7980 8742 ·{" "}
+            Mankayane, Eswatini · +268 7636 5430 / +268 7980 8742 ·{" "}
             <a href="mailto:dlaminibrightwell@gmail.com" className="text-blue-700 underline">
               dlaminibrightwell@gmail.com
             </a>{" "}
