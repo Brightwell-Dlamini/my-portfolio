@@ -21,8 +21,11 @@
   --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Smooth scroll only on devices that handle it well */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -35,14 +38,14 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Promote body to its own layer less aggressively; avoid over-compositing */
+  /* Avoid overscroll chaining jank on mobile */
+  overscroll-behavior-y: none;
 }
 
 ::selection {
   background-color: rgb(37 99 235 / 0.25);
 }
 
-/* Soft scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -58,18 +61,20 @@ body {
   background: rgb(71 85 105 / 0.6);
 }
 
-/*
- * Glow helpers — cheaper than animated blur-3xl motion layers.
- * Fixed blur radius + will-change: transform keeps paint cost low.
- */
+/* Cheaper glow — no large animated filters */
 .glow-orb {
-  filter: blur(60px);
-  opacity: 0.4;
-  will-change: auto;
+  filter: blur(40px);
+  opacity: 0.35;
   transform: translateZ(0);
 }
 .dark .glow-orb {
-  opacity: 0.3;
+  opacity: 0.25;
+}
+
+/* Sections: skip offscreen layout/paint work where supported */
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .card-surface {
@@ -92,6 +97,22 @@ body {
 }
 .dark .card-surface:hover {
   border-color: rgb(71 85 105 / 0.95);
+}
+
+/* Touch devices: drop expensive backdrop-blur and continuous animations */
+@media (hover: none), (pointer: coarse) {
+  .glow-orb {
+    filter: blur(24px);
+    opacity: 0.2;
+  }
+
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
