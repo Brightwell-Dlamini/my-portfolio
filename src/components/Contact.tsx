@@ -144,7 +144,7 @@ export function Contact() {
               </div>
 
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
-                Let's talk
+                Let{"'"}s talk
                 <span className="absolute -bottom-2 left-0 h-1 w-24 rounded-full bg-gradient-to-r from-brand-500 to-accent-500" />
               </h2>
 
