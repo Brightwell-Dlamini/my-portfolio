@@ -13,4 +13,4 @@ Next.js 15 · TypeScript · Tailwind v4 · next-themes · Framer Motion
 ## Contact
 
 - dlaminibrightwell@gmail.com
-- +268 7636 5539 / +268 7980 8742
+- +268 7636 5430 / +268 7980 8742
