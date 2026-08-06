@@ -53,7 +53,7 @@ export function About() {
           <div className="lg:col-span-3 space-y-5">
             <p className="text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
               I first encountered computer science as the{' '}
-              <span className="font-semibold text-slate-900 dark:text-white">"most difficult"</span>{' '}
+              <span className="font-semibold text-slate-900 dark:text-white">&quot;most difficult&quot;</span>{' '}
               combination the University of Eswatini offered. Intrigued by the challenge, I dove in — having never used a computer before.
             </p>
 
@@ -80,7 +80,7 @@ export function About() {
                 href="#contact"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
               >
-                <span>Let's connect</span>
+                <span>Let&apos;s connect</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
