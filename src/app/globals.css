@@ -25,10 +25,17 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Promote body to its own layer less aggressively; avoid over-compositing */
 }
 
 ::selection {
@@ -51,13 +58,18 @@ body {
   background: rgb(71 85 105 / 0.6);
 }
 
-/* Mesh / glow helpers */
+/*
+ * Glow helpers — cheaper than animated blur-3xl motion layers.
+ * Fixed blur radius + will-change: transform keeps paint cost low.
+ */
 .glow-orb {
-  filter: blur(80px);
-  opacity: 0.45;
+  filter: blur(60px);
+  opacity: 0.4;
+  will-change: auto;
+  transform: translateZ(0);
 }
 .dark .glow-orb {
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 .card-surface {
@@ -89,6 +101,7 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
